@@ -1,0 +1,29 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="wordmark">TRT<span>Guide</span></a>
+    <nav class="header-nav">
+      <div class="nav-dropdown">
+        <a href="/reviews" <%= currentPath && currentPath.startsWith('/reviews') ? 'class="active"' : '' %>>Reviews <span class="nav-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <% navReviews.forEach(function(review) { %>
+            <a href="/reviews/<%= review.slug %>"><%= review.name %></a>
+          <% }); %>
+          <a href="/comparison" class="nav-dropdown-footer">All reviews →</a>
+        </div>
+      </div>
+      <a href="/comparison" <%= currentPath === '/comparison' ? 'class="active"' : '' %>>Compare</a>
+      <a href="/quiz" <%= currentPath === '/quiz' ? 'class="active"' : '' %>>Find Your Clinic</a>
+      <div class="nav-dropdown">
+        <a href="/learn" <%= currentPath && currentPath.startsWith('/learn') ? 'class="active"' : '' %>>Learn <span class="nav-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <% navArticles.forEach(function(article) { %>
+            <a href="/learn/<%= article.slug %>"><%= article.title %></a>
+          <% }); %>
+          <a href="/learn" class="nav-dropdown-footer">All articles →</a>
+        </div>
+      </div>
+      <a href="/guides" <%= currentPath === '/guides' || (currentPath && currentPath.startsWith('/guides')) ? 'class="active"' : '' %>>Guides</a>
+      <a href="/methodology" <%= currentPath === '/methodology' ? 'class="active"' : '' %>>Methodology</a>
+    </nav>
+  </div>
+</header>

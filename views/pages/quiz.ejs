@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MSQ0CL4HRQ');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Best TRT Clinic — TRT Guide</title>
+  <meta name="description" content="Answer 5 quick questions and get matched to the TRT clinic that fits your budget, preferences, and timeline.">
+  <meta property="og:title" content="Find Your Best TRT Clinic — 2-Minute Quiz | TRT Guide">
+  <meta property="og:description" content="Tell us your budget, delivery preference, and timeline. We'll match you to the best TRT clinic for your situation.">
+  <meta property="og:site_name" content="TRT Guide">
+  <meta property="og:image" content="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/fca12b56-94bd-431a-9a2c-d3362daaad60.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/quiz.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+</head>
+<body>
+  <%- include('../partials/header', { currentPath }) %>
+
+  <%
+  // Clinic name lookup
+  const CLINIC_NAMES = {
+    'trt-nation':       'TRT Nation',
+    'fountain-trt':     'Fountain TRT',
+    'hone-health':      'Hone Health',
+    'marek-health':     'Marek Health',
+    'defy-medical':    'Defy Medical',
+    'synergenx-health': 'SynergenX Health',
+    'low-t-center':    'Low T Center',
+  };
+  function cName(slug) { return CLINIC_NAMES[slug] || slug; }
+
+  // Question definitions
+  const QUESTIONS = [
+    {
+      num: 1,
+      key: 'trtStatus',
+      question: 'Are you currently on testosterone therapy?',
+      subtitle: 'This helps us route you to clinics that match your experience level.',
+      options: [
+        { value: 'beginner', label: 'No, I haven\u2019t started yet', sub: 'First time looking into TRT' },
+        { value: 'researching', label: 'I\u2019ve done some research', sub: 'Know the basics, comparing options' },
+        { value: 'switching', label: 'Yes, switching providers', sub: 'Already on TRT, want a better fit' },
+      ]
+    },
+    {
+      num: 2,
+      key: 'budget',
+      question: 'What\u2019s your monthly budget for TRT?',
+      subtitle: 'Include consultation, labs, and medication costs.',
+      options: [
+        { value: 'under100', label: 'Under $100/month', sub: 'Most budget-friendly option' },
+        { value: '100to200', label: '$100 \u2013 $200/month', sub: 'Mid-range, good value' },
+        { value: '200to350', label: '$200 \u2013 $350/month', sub: 'Premium concierge tier' },
+        { value: '350plus', label: '$350+/month', sub: 'No budget ceiling, want the best' },
+      ]
+    },
+    {
+      num: 3,
+      key: 'delivery',
+      question: 'Which TRT delivery method interests you?',
+      subtitle: 'Not sure? \u201cNot sure yet\u201d is a valid answer \u2014 we\u2019ll filter accordingly.',
+      options: [
+        { value: 'injection', label: 'Injections', sub: 'Most common, typically $50\u2013$150/mo' },
+        { value: 'gel', label: 'Gel or cream', sub: 'Applied daily, no needles' },
+        { value: 'patches', label: 'Patches or pellets', sub: 'Less common delivery methods' },
+        { value: 'not-sure', label: 'Not sure yet', sub: 'Figure it out after a consultation' },
+      ]
+    },
+    {
+      num: 4,
+      key: 'telemedicine',
+      question: 'Do you need in-person lab visits?',
+      subtitle: 'Most clinics offer fully remote care. Hybrid clinics require local lab work.',
+      options: [
+        { value: 'fully-remote', label: 'No, fully remote is fine', sub: 'Any clinic that ships to my state' },
+        { value: 'flexible', label: 'Flexible', sub: 'I don\u2019t have a strong preference' },
+        { value: 'need-local', label: 'Yes, I need local labs', sub: 'Prefer in-person or hybrid clinics' },
+      ]
+    },
+    {
+      num: 5,
+      key: 'timeline',
+      question: 'How quickly do you want to start?',
+      subtitle: 'Approval speed varies by clinic. Some get you a prescription in 48 hours.',
+      options: [
+        { value: 'asap', label: 'ASAP', sub: 'Ready to go today or this week' },
+        { value: 'two-weeks', label: 'Within 2 weeks', sub: 'Can wait a short while' },
+        { value: 'researching', label: 'Just researching', sub: 'No urgency, comparing' },
+      ]
+    },
+  ];
+
+  function scoreTierClass(s) {
+    if (s >= 9) return 'tier-a';
+    if (s >= 8) return 'tier-b';
+    if (s >= 7) return 'tier-c';
+    return 'tier-d';
+  }
+  function matchScoreClass(s) {
+    if (s >= 85) return 'match-high';
+    if (s >= 70) return 'match-mid';
+    return 'match-low';
+  }
+  %>
+
+  <div class="quiz-page">
+
+    <% if (step !== 'results') { %>
+    <!-- Progress bar -->
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-track">
+        <%
+        const totalSteps = 5;
+        const progressSteps = step === 'lead' ? 5 : parseInt(step);
+        const pct = Math.round((progressSteps / totalSteps) * 100);
+        %>
+        <div class="quiz-progress-fill" style="width:<%= pct %>%"></div>
+      </div>
+      <% if (step !== 'lead') { %>
+      <div class="quiz-progress-label"><%= progressSteps %> of <%= totalSteps %></div>
+      <% } else { %>
+      <div class="quiz-progress-label">5 of 5 &mdash; last step</div>
+      <% } %>
+    </div>
+
+    <div class="quiz-card">
+      <% if (step === 'lead') { %>
+      <!-- LEAD CAPTURE STEP -->
+      <div class="quiz-step quiz-step-lead">
+        <div class="quiz-step-label" style="color:var(--gold);">Final step</div>
+        <h2>Get your personalized match</h2>
+        <p class="quiz-step-sub">Enter your email and we\u2019ll show you the best TRT clinic for your profile right now.</p>
+
+        <form action="/quiz/results" method="POST" class="lead-form" id="leadForm">
+          <input type="hidden" name="sessionId" value="<%= sessionId %>">
+          <input type="hidden" name="answers" value='<%= JSON.stringify(answers) %>'>
+          <input type="hidden" name="source" value="quiz">
+
+          <div class="form-group">
+            <label for="name">First name</label>
+            <input type="text" id="name" name="name" placeholder="Alex" required autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="alex@example.com" required autocomplete="email">
+          </div>
+
+          <button type="submit" class="btn-primary btn-lead">
+            See my best match
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <p class="lead-form-note">No spam. No phone calls. Unsubscribe anytime.</p>
+        </form>
+      </div>
+
+      <% } else { %>
+      <!-- QUESTION STEPS -->
+      <%
+      const q = QUESTIONS[parseInt(step) - 1];
+      const answersJson = JSON.stringify(answers);
+      %>
+      <div class="quiz-step">
+        <div class="quiz-step-label" style="color:var(--gold);">Question <%= q.num %> of 5</div>
+        <h2><%= q.question %></h2>
+        <p class="quiz-step-sub"><%= q.subtitle %></p>
+
+        <form action="/quiz/answer" method="POST" class="quiz-question-form" id="quizForm">
+          <input type="hidden" name="step" value="<%= step %>">
+          <input type="hidden" name="sessionId" value="<%= sessionId %>">
+          <input type="hidden" name="answers" value='<%= answersJson %>'>
+
+          <div class="option-grid">
+            <% q.options.forEach(opt => { %>
+            <label class="option-card">
+              <input type="radio" name="answer" value="<%= opt.value %>" required>
+              <span class="option-content">
+                <span class="option-label"><%= opt.label %></span>
+                <span class="option-sub"><%= opt.sub %></span>
+              </span>
+            </label>
+            <% }); %>
+          </div>
+
+          <button type="submit" class="btn-primary btn-next">
+            Continue
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+      <% } %>
+    </div>
+
+    <% } else { %>
+    <!-- RESULTS STEP -->
+    <div class="quiz-results-page">
+      <div class="quiz-results-header">
+        <div class="section-label" style="color:var(--gold);">Your match</div>
+        <h1>Best TRT Clinic for You</h1>
+        <p class="quiz-results-sub">Based on your answers: <strong><%= answers.budget === 'under100' ? 'Under $100/mo' : answers.budget === '100to200' ? '$100–200/mo' : answers.budget === '200to350' ? '$200–350/mo' : '$350+/mo' %></strong>,
+          <% if (answers.delivery === 'injection') { %>injections<% } else if (answers.delivery === 'gel') { %>gel/cream<% } else if (answers.delivery === 'patches') { %>patches<% } else { %>flexible delivery<% } %>,
+          <% if (answers.telemedicine === 'fully-remote') { %>fully remote<% } else if (answers.telemedicine === 'need-local') { %>local labs needed<% } else { %>flexible location<% } %>.
+        </p>
+      </div>
+
+      <!-- TOP MATCH -->
+      <% if (topMatch) { %>
+      <div class="match-card match-card-primary">
+        <div class="match-badge">Best Match</div>
+        <div class="match-top">
+          <div class="match-info">
+            <h2 class="match-clinic-name"><%= topMatch.c.score.toFixed(1) %> — <%= cName(topMatch.slug) %></h2>
+            <div class="match-reason"><%= matchReason %></div>
+            <div class="match-score-bar">
+              <div class="match-score-fill <%= matchScoreClass(topMatch.total) %>" style="width:<%= topMatch.total %>%"></div>
+            </div>
+            <div class="match-score-label"><%= topMatch.total %>% match score</div>
+          </div>
+        </div>
+
+        <!-- Score breakdown -->
+        <div class="match-breakdown">
+          <div class="breakdown-title">Why we matched you:</div>
+          <div class="breakdown-grid">
+            <% if (topMatch.dimScores.budget >= 100) { %>
+            <div class="breakdown-item breakdown-hit">
+              <span class="breakdown-icon">&#10003;</span> Matches your budget
+            </div>
+            <% } else { %>
+            <div class="breakdown-item breakdown-partial">
+              <span class="breakdown-icon">&#8212;</span> Acceptable for your budget
+            </div>
+            <% } %>
+            <% if (topMatch.dimScores.delivery >= 80) { %>
+            <div class="breakdown-item breakdown-hit">
+              <span class="breakdown-icon">&#10003;</span> Offers your preferred delivery
+            </div>
+            <% } else { %>
+            <div class="breakdown-item breakdown-partial">
+              <span class="breakdown-icon">&#8212;</span> Has alternative delivery options
+            </div>
+            <% } %>
+            <% if (topMatch.dimScores.telemedicine >= 100) { %>
+            <div class="breakdown-item breakdown-hit">
+              <span class="breakdown-icon">&#10003;</span> <%= answers.telemedicine === 'fully-remote' ? 'Fully remote care' : 'Hybrid in-person model' %>
+            </div>
+            <% } else { %>
+            <div class="breakdown-item breakdown-partial">
+              <span class="breakdown-icon">&#8212;</span> Flexible location model
+            </div>
+            <% } %>
+            <% if (answers.trtStatus !== 'switching' && topMatch.c.beginnerFriendly) { %>
+            <div class="breakdown-item breakdown-hit">
+              <span class="breakdown-icon">&#10003;</span> Beginner-friendly onboarding
+            </div>
+            <% } %>
+          </div>
+        </div>
+
+        <!-- Lead capture -->
+        <div class="match-email-cta">
+          <div class="email-cta-inner">
+            <div class="email-cta-text">
+              <strong>Get your full comparison report emailed to you</strong>
+              <span>See how this clinic stacks up against your other options.</span>
+            </div>
+            <form action="/quiz/results" method="POST" class="email-inline-form" style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
+              <input type="hidden" name="sessionId" value="<%= sessionId %>">
+              <input type="hidden" name="answers" value='<%= JSON.stringify(answers) %>'>
+              <input type="hidden" name="source" value="quiz-results-click">
+              <input type="email" name="email" placeholder="your@email.com" style="padding:0.6rem 0.9rem;border:1px solid var(--border-strong);border-radius:6px;font-size:0.9rem;min-width:180px;" required>
+              <button type="submit" class="btn-primary" style="padding:0.6rem 1.2rem;font-size:0.875rem;">Email me</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Affiliate CTA -->
+        <div class="match-cta-area">
+          <a href="/quiz/click/<%= topMatch.slug %>?session=<%= sessionId %>" class="btn-affiliate btn-affiliate-primary"
+             onclick="fetch('/quiz/click',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'<%= sessionId %>',clinicSlug:'<%= topMatch.slug %>'})}).then(()=>{});">
+            Visit <%= cName(topMatch.slug) %> &rarr;
+          </a>
+        </div>
+      </div>
+      <% } %>
+
+      <!-- RUNNER-UPS -->
+      <% if (runnerUps && runnerUps.length > 0) { %>
+      <div class="runner-ups-section">
+        <h3 class="runner-ups-title">Other strong matches</h3>
+        <div class="runner-ups-grid">
+          <% runnerUps.forEach(r => { %>
+          <div class="match-card match-card-secondary">
+            <div class="runner-up-rank"><%= r.total %>% match</div>
+            <h3 class="runner-up-name"><%= cName(r.slug) %></h3>
+            <p class="runner-up-score">Review score: <strong><%= r.c.score.toFixed(1) %>/10</strong></p>
+            <a href="/quiz/click/<%= r.slug %>?session=<%= sessionId %>" class="btn-affiliate btn-affiliate-secondary"
+               onclick="fetch('/quiz/click',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'<%= sessionId %>',clinicSlug:'<%= r.slug %>'})}).then(()=>{});">
+              Visit &rarr;
+            </a>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+      <% } %>
+
+      <!-- FTC Disclosure -->
+      <div class="quiz-ftc-notice">
+        <em>We may earn a commission if you sign up through our links &mdash; our recommendations are based on merit only. <a href="/ftc-disclosure">Full FTC disclosure</a></em>
+      </div>
+
+      <!-- Retake link -->
+      <div class="quiz-retake">
+        <a href="/quiz">Retake the quiz &rarr;</a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+  <!-- Continue learning strip -->
+  <div style="background:var(--ink);padding:2.5rem 2rem;text-align:center;">
+    <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);font-weight:600;margin-bottom:0.5rem;">Before you take the quiz</p>
+    <p style="font-size:1.1rem;color:var(--white);margin-bottom:1.25rem;font-family:'DM Serif Display',serif;">Know what you're getting into first</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;max-width:700px;margin:0 auto;">
+      <a href="/learn/trt-for-beginners" style="flex:1;min-width:160px;background:rgba(250,248,244,0.07);border:1px solid rgba(250,248,244,0.15);border-radius:6px;padding:1rem;text-decoration:none;display:block;">
+        <div style="font-size:0.8rem;font-weight:600;color:var(--white);margin-bottom:0.25rem;">💉 TRT for beginners</div>
+        <div style="font-size:0.72rem;color:rgba(250,248,244,0.45);line-height:1.4;">Your first 90 days, explained</div>
+      </a>
+      <a href="/learn/trt-cost" style="flex:1;min-width:160px;background:rgba(250,248,244,0.07);border:1px solid rgba(250,248,244,0.15);border-radius:6px;padding:1rem;text-decoration:none;display:block;">
+        <div style="font-size:0.8rem;font-weight:600;color:var(--white);margin-bottom:0.25rem;">💰 TRT cost breakdown</div>
+        <div style="font-size:0.72rem;color:rgba(250,248,244,0.45);line-height:1.4;">What you'll actually pay</div>
+      </a>
+      <a href="/comparison" style="flex:1;min-width:160px;background:rgba(250,248,244,0.07);border:1px solid rgba(250,248,244,0.15);border-radius:6px;padding:1rem;text-decoration:none;display:block;">
+        <div style="font-size:0.8rem;font-weight:600;color:var(--white);margin-bottom:0.25rem;">📊 Compare all clinics</div>
+        <div style="font-size:0.72rem;color:rgba(250,248,244,0.45);line-height:1.4;">Side-by-side scores + pricing</div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+  // Auto-advance on selection (optional UX improvement)
+  const form = document.getElementById('quizForm');
+  if (form) {
+    const options = form.querySelectorAll('input[name="answer"]');
+    options.forEach(opt => {
+      opt.addEventListener('change', () => {
+        setTimeout(() => form.submit(), 300);
+      });
+    });
+  }
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && form) {
+      const checked = form.querySelector('input[name="answer"]:checked');
+      if (checked) form.submit();
+    }
+  });
+  </script>
+
+  <%- include('../partials/footer') %>
+  <% if (analyticsSnippet) { %><%- analyticsSnippet %><% } %>
+</body>
+</html>

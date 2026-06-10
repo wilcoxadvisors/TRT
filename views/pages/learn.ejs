@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MSQ0CL4HRQ');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="TRT Education">
+  <meta property="og:description" content="Learn how TRT works, what the labs mean, and what the research says. Informational only — not medical advice.">
+  <meta property="og:site_name" content="TRT Guide">
+  <meta name="twitter:title" content="TRT Education">
+  <meta name="twitter:description" content="Learn how TRT works, what the labs mean, and what the research says. Informational only — not medical advice.">
+  <title>TRT Education Hub — Learn About Testosterone Therapy | TRT Guide</title>
+  <meta name="description" content="Learn TRT before you start. Evidence-based guides on benefits, side effects, lab values, costs, and what to expect in your first 90 days.">
+  <meta property="og:title" content="TRT Education Hub — Learn About Testosterone Therapy | TRT Guide">
+  <meta property="og:description" content="Learn TRT before you start. Evidence-based guides on benefits, side effects, lab values, costs, and what to expect.">
+  <meta property="og:image" content="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/fca12b56-94bd-431a-9a2c-d3362daaad60.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://trtguide.polsia.app" },
+      { "@type": "ListItem", "position": 2, "name": "TRT Education", "item": "https://trtguide.polsia.app/learn" }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+  <style>
+    .hub-header { background: var(--ink); color: var(--parchment); padding: 4rem 2rem 3rem; }
+    .hub-header-inner { max-width: 900px; margin: 0 auto; }
+    .hub-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 600; margin-bottom: 1rem; }
+    .hub-title { font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+    .hub-sub { font-size: 1rem; color: rgba(250,248,244,0.6); max-width: 560px; line-height: 1.75; }
+    .hub-body { padding: 4rem 2rem; background: var(--parchment); }
+    .hub-inner { max-width: 900px; margin: 0 auto; }
+    .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 0; }
+    .topic-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
+    .topic-card:hover { border-color: var(--gold); box-shadow: 0 4px 24px rgba(26,26,46,0.06); }
+    .topic-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+    .topic-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .topic-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .topic-level { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 4px; display: inline-block; }
+    .level-beginner { background: rgba(16,185,129,0.1); color: #059669; }
+    .level-intermediate { background: rgba(201,168,76,0.1); color: var(--gold-dark); }
+    .level-advanced { background: rgba(239,68,68,0.06); color: #dc2626; }
+    @media (max-width: 600px) { .topic-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <%- include('../partials/header', { currentPath }) %>
+
+  <div class="hub-header">
+    <div class="hub-header-inner">
+      <div class="hub-eyebrow">Education</div>
+      <h1 class="hub-title">Learn about TRT</h1>
+      <p class="hub-sub">How it works, what the labs mean, and what the research says. Informational only — not medical advice.</p>
+    </div>
+  </div>
+
+  <div class="hub-body">
+    <div class="hub-inner">
+      <div style="background:#d1fae5;border:1px solid #6ee7b7;border-radius:8px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:0.875rem;color:#065f46;font-weight:500;">
+        6 full articles now live — <a href="/learn/what-is-trt" style="color:#047857;font-weight:700;">Start with "What is TRT?"</a>
+      </div>
+      <div class="topic-grid">
+        <% topics.forEach(t => { %>
+        <a href="/learn/<%= t.slug %>" class="topic-card">
+          <span class="topic-icon"><%= t.icon %></span>
+          <h2 class="topic-title"><%= t.title %></h2>
+          <p class="topic-desc"><%= t.description %></p>
+          <span class="topic-level level-<%= t.level.toLowerCase() %>"><%= t.level %></span>
+        </a>
+        <% }); %>
+      </div>
+
+      <div style="text-align:center;padding:3rem 0 1rem;color:var(--muted);font-size:0.8rem;">
+        Topics expanding Q3 2026.
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.75rem;background:var(--ink);border-radius:8px;text-align:center;">
+        <p style="font-size:1rem;font-weight:600;color:var(--white);margin-bottom:0.75rem;">Ready to choose a clinic?</p>
+        <p style="font-size:0.875rem;color:rgba(250,248,244,0.6);margin-bottom:1.25rem;line-height:1.6;">Our rubric scores each clinic on pricing, medical oversight, lab comprehensiveness, and more. Start with the comparison table or pick a buying guide.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="/comparison" style="background:var(--gold);color:var(--ink);font-weight:700;font-size:0.875rem;padding:0.7rem 1.5rem;border-radius:6px;text-decoration:none;">Compare all 9 clinics →</a>
+          <a href="/guides" style="background:rgba(250,248,244,0.1);color:var(--white);font-weight:600;font-size:0.875rem;padding:0.7rem 1.5rem;border-radius:6px;text-decoration:none;border:1px solid rgba(250,248,244,0.2);">See all buying guides →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+  <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7340646-c3d0-4453-b928-193f9b713f1a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
+  <% if (analyticsSnippet) { %><%- analyticsSnippet %><% } %>
+</body>
+</html>

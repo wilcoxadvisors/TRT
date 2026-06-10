@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MSQ0CL4HRQ');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRT Guide | Honest TRT Clinic Comparisons 2026</title>
+  <meta name="description" content="Compare the best online TRT clinics of 2026. Honest reviews, transparent pricing, and data-driven rankings to help you choose the right provider.">
+  <meta property="og:title" content="TRT Guide | Honest TRT Clinic Comparisons 2026">
+  <meta property="og:description" content="Compare the best online TRT clinics of 2026. Honest reviews, transparent pricing, and data-driven rankings to help you choose the right provider.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "TRT Guide",
+    "url": "https://trtguide.polsia.app",
+    "description": "Independent, rubric-based reviews of online TRT clinics. Honest comparisons with transparent pricing and no affiliate bias."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://trtguide.polsia.app" }
+    ]
+  }
+  </script>
+  <meta property="og:site_name" content="TRT Guide">
+  <meta name="twitter:title" content="TRT Guide — Honest Reviews of Online TRT Clinics">
+  <meta name="twitter:description" content="Independent, rubric-based reviews of online TRT clinics.">
+  <meta property="og:image" content="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/fca12b56-94bd-431a-9a2c-d3362daaad60.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+</head>
+<body>
+  <%- include('../partials/header', { currentPath: '/' }) %>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Independent clinic reviews — not medical advice</div>
+        <h1 class="hero-headline">The honest TRT clinic comparison. No hype, no hidden incentives.</h1>
+        <p class="hero-sub">Same 10-point rubric. Every claim cited. Updated quarterly.</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number"><%= clinics.length %></span>
+            <span class="stat-label">clinics reviewed</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">10</span>
+            <span class="stat-label">-point rubric</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">Q2</span>
+            <span class="stat-label">2026 cycle</span>
+          </div>
+        </div>
+
+      <!-- Quiz CTA — prominent above fold -->
+      <div class="quiz-hero-banner">
+        <div class="quiz-hero-badge">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 1L10.1 5.6L15 6.4L11.5 10.1L12.4 15L8 12.5L3.6 15L4.5 10.1L1 6.4L5.9 5.6L8 1Z" fill="#C9A84C"/>
+          </svg>
+          Match Tool
+        </div>
+        <div class="quiz-hero-body">
+          <div class="quiz-hero-headline">Not sure which TRT clinic is right for you?</div>
+          <div class="quiz-hero-sub">Answer 5 quick questions — we factor in your budget, delivery speed, telemedicine access, and TRT status. Takes 2 minutes.</div>
+        </div>
+        <a href="/quiz" class="quiz-hero-btn">Take the quiz →</a>
+      </div>
+      </div>
+
+      <!-- Hero panel: live comparison table -->
+      <div class="hero-panel">
+        <div class="hero-panel-header">
+          <div class="hero-panel-label">Head-to-head: value ranking</div>
+        </div>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th style="padding-left:1.25rem">Clinic</th>
+              <th>Price/mo</th>
+              <th>MD</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% clinics.forEach((c, i) => { %>
+            <tr class="<%= i === 0 ? 'row-featured' : '' %>">
+              <td style="padding-left:1.25rem">
+                <a href="/reviews/<%= c.slug %>" class="comp-clinic-name">
+                  <% if (i === 0) { %><span class="comp-featured-dot"></span><% } %>
+                  <%= c.name %>
+                </a>
+              </td>
+              <td><span class="mono" style="color:rgba(250,248,244,<%= i === 0 ? '0.9' : '0.7' %>);font-weight:600;"><%= c.price.replace('/mo','').replace('/4wk','') %></span></td>
+              <td style="color:#6ee7b7;">✓</td>
+              <td>
+                <%
+                  function heroTier(s) {
+                    if (s >= 9) return 'tier-a';
+                    if (s >= 8) return 'tier-b';
+                    if (s >= 7) return 'tier-c';
+                    return 'tier-d';
+                  }
+                %>
+                <span class="score-pill <%= heroTier(c.score) %>" style="font-size:0.8rem;"><%= c.score %></span>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <div class="hero-panel-foot">
+          Updated Q2 2026 &middot; <a href="/methodology">see full methodology</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FTC NOTICE — unobtrusive -->
+  <div class="ftc-notice">
+    <em>TRT Guide may earn a commission if you purchase through links on this page. This does not affect our editorial ratings. <a href="/ftc-disclosure">Full FTC disclosure</a></em>
+  </div>
+
+  <!-- METHODOLOGY PREVIEW -->
+  <section class="methodology">
+    <div class="methodology-inner">
+      <div class="section-label">How we score</div>
+      <h2 class="section-headline">10-point rubric, applied identically to every clinic.</h2>
+      <p class="section-body">We evaluate clinics on pricing, medical oversight, medication range, consultation quality, lab work, shipping, side effect support, customer service, cancellation flexibility, and overall value. Each category is scored 1–10 and weighted equally.</p>
+      <div class="rubric-grid">
+        <% const rubricItems = [
+          {num:'01',name:'Pricing',short:'Transparency and true cost'},
+          {num:'02',name:'Medical oversight',short:'Physician quality & model'},
+          {num:'03',name:'Medication menu',short:'Range of options'},
+          {num:'04',name:'Consult experience',short:'Onboarding & access'},
+          {num:'05',name:'Lab & monitoring',short:'Testing cadence & depth'},
+          {num:'06',name:'Shipping',short:'Reliability & speed'},
+          {num:'07',name:'Side effects',short:'Protocol support quality'},
+          {num:'08',name:'Support',short:'Response time & quality'},
+          {num:'09',name:'Cancellation',short:'Exit flexibility'},
+          {num:'10',name:'Overall value',short:'Cost vs. 6-month outcome'},
+        ]; %>
+        <% rubricItems.forEach(item => { %>
+        <div class="rubric-item">
+          <div class="rubric-num"><%= item.num %></div>
+          <div class="rubric-content">
+            <h3><%= item.name %></h3>
+            <p><%= item.short %></p>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+      <div class="methodology-cta">
+        <a href="/methodology" class="text-link">Read the full methodology →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLINIC CARDS -->
+  <section class="clinics">
+    <div class="clinics-inner">
+      <div class="section-label">Published reviews — Q2 2026</div>
+      <h2 class="section-headline"><%= clinics.length %> clinics reviewed this cycle</h2>
+      <p class="section-body">Each review is 2,500–3,500 words with cited evidence, pricing tables, and a clear verdict. Scores can go down as well as up — we re-review quarterly.</p>
+
+      <div class="clinic-cards">
+        <%
+          function cardTier(s) {
+            if (s >= 9) return 'tier-a';
+            if (s >= 8) return 'tier-b';
+            if (s >= 7) return 'tier-c';
+            return 'tier-d';
+          }
+        %>
+        <% clinics.forEach(c => { %>
+        <a href="/reviews/<%= c.slug %>" class="clinic-card">
+          <div class="card-header">
+            <span class="rank-tag">#<%= c.rank %></span>
+            <div class="card-name"><%= c.name %></div>
+            <div class="score-badge score-badge-sm <%= cardTier(c.score) %>"><%= c.score %></div>
+          </div>
+          <div class="card-tags">
+            <% if (c.badge) { %><span class="best-tag"><%= c.badge %></span><% } %>
+            <span class="tag mono"><%= c.price %></span>
+          </div>
+          <p class="card-summary"><%= c.tagline.split('—')[1] ? c.tagline.split('—')[1].trim() : c.tagline %></p>
+          <div class="card-cta">Read full review →</div>
+        </a>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLINIC CARDS SECTION: hub links -->
+  <div style="text-align:center;padding:1rem 2rem 0.5rem;">
+    <a href="/reviews" style="color:var(--gold-dark);font-weight:600;font-size:0.875rem;text-decoration:none;">Browse all <%= clinics.length %> reviews →</a>
+    <span style="margin:0 0.75rem;color:var(--muted);">·</span>
+    <a href="/guides" style="color:var(--gold-dark);font-weight:600;font-size:0.875rem;text-decoration:none;">See all buying guides →</a>
+  </div>
+
+  <!-- LEARN HUB STRIP -->
+  <section style="background:var(--ink);padding:3rem 2rem;">
+    <div style="max-width:900px;margin:0 auto;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem;gap:1rem;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);font-weight:600;margin-bottom:0.4rem;">TRT Education</div>
+          <h2 style="font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--white);margin:0;">Read before you pick a clinic</h2>
+        </div>
+        <a href="/learn" style="color:var(--gold);font-weight:600;font-size:0.875rem;text-decoration:none;white-space:nowrap;">See all articles →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+        <% topics.forEach(t => { %>
+        <a href="/learn/<%= t.slug %>" style="background:rgba(250,248,244,0.06);border:1px solid rgba(250,248,244,0.1);border-radius:8px;padding:1.25rem;text-decoration:none;display:block;transition:border-color 0.2s;">
+          <div style="font-size:1.25rem;margin-bottom:0.5rem;"><%= t.icon %></div>
+          <div style="font-weight:600;font-size:0.875rem;color:var(--white);margin-bottom:0.4rem;"><%= t.title.replace('testosterone replacement therapy (TRT)', 'TRT').replace('Understanding your TRT', '').trim().startsWith('What') ? 'What is TRT?' : t.title.length > 30 ? t.title.split(':')[0] : t.title %></div>
+          <div style="font-size:0.78rem;color:rgba(250,248,244,0.5);line-height:1.5;"><%= t.description.slice(0, 100) %><%= t.description.length > 100 ? '…' : '' %></div>
+        </a>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDEPENDENCE -->
+  <section class="independence">
+    <div class="independence-inner">
+      <div class="independence-headline">We have no financial relationships with reviewed clinics beyond affiliate revenue — which we disclose on every page.</div>
+      <div class="independence-content">
+        <p>TRT Guide earns money when you click a link and purchase. That means our incentives are aligned with your outcome — not just the clinic's conversion rate. If a clinic is bad, we say so. If it's the best value, we say that and link to it.</p>
+        <div class="independence-statements">
+          <div class="statement">
+            <div class="statement-icon">📋</div>
+            <p><strong>Same rubric, every time</strong>Every clinic scored on the same 10 categories. No special treatment for paying affiliates.</p>
+          </div>
+          <div class="statement">
+            <div class="statement-icon">🔬</div>
+            <p><strong>Claims are cited</strong>Every pricing claim, physician credential, and product statement links to a source or is based on first-hand testing.</p>
+          </div>
+          <div class="statement">
+            <div class="statement-icon">🔄</div>
+            <p><strong>Quarterly updates</strong>We re-review every quarter. Scores go down if quality drops. We track and publish that publicly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <% const topClinic = clinics[0]; const secondClinic = clinics[1]; %>
+  <section class="closing">
+    <div class="closing-inner">
+      <h2 class="closing-headline">Ready to choose? Start with <%= topClinic.name %> for value<% if (secondClinic) { %>. <%= secondClinic.name %> for service<% } %>.</h2>
+      <p class="closing-sub">Not sure yet? Read the full reviews. Every clinic has a 2,500–3,500 word deep-dive with a scored breakdown. No paywalled conclusions.</p>
+      <div class="closing-meta">
+        <div class="meta-item">
+          <span class="meta-label">Last updated</span>
+          <span class="meta-value">Q2 2026</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Clinics reviewed</span>
+          <span class="meta-value"><%= clinics.length %></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Avg. score</span>
+          <span class="meta-value"><%= (clinics.reduce((sum, c) => sum + c.score, 0) / clinics.length).toFixed(1) %></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('../partials/footer') %>
+  <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7340646-c3d0-4453-b928-193f9b713f1a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
+  <% if (analyticsSnippet) { %><%- analyticsSnippet %><% } %>
+</body>
+</html>

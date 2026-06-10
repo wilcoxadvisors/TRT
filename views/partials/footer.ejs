@@ -1,0 +1,43 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-wordmark">TRT<span>Guide</span></div>
+        <p>Honest, rubric-based reviews of online TRT clinics. Independent editorial. Updated quarterly.</p>
+        <div class="footer-updated">Last updated: Q2 2026 &middot; Next cycle: Q3 2026</div>
+      </div>
+      <div class="footer-links">
+        <div class="link-group">
+          <div class="link-group-label">Reviews (<%= navReviews.length %> clinics)</div>
+          <% navReviews.forEach(function(review) { %>
+            <a href="/reviews/<%= review.slug %>"><%= review.name %></a>
+          <% }); %>
+          <a href="/comparison">All reviews →</a>
+        </div>
+        <div class="link-group">
+          <div class="link-group-label">Resources</div>
+          <a href="/guides">Buying guides</a>
+          <a href="/guides/hone-vs-marek-cost">Hone vs. Marek</a>
+          <a href="/learn">Learn hub</a>
+          <% navArticles.forEach(function(article) { %>
+            <a href="/learn/<%= article.slug %>"><%= article.title %></a>
+          <% }); %>
+          <a href="/methodology">Methodology</a>
+          <a href="/ftc-disclosure">FTC Disclosure</a>
+        </div>
+        <div class="link-group">
+          <div class="link-group-label">Company</div>
+          <a href="/about">About TRT Guide</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/medical-disclaimer">Medical Disclaimer</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">
+        <p>TRT Guide is an informational resource only and does not provide medical advice. All content is educational. TRT is a prescription treatment — consult a licensed physician before starting any hormone therapy. We may earn affiliate commissions when you click clinic links; this is disclosed on every page and does not influence editorial scores. &copy; 2026 TRT Guide LLC. <a href="/privacy">Privacy</a> &middot; <a href="/ftc-disclosure">FTC Disclosure</a> &middot; <a href="/medical-disclaimer">Medical Disclaimer</a> &middot; <a href="/methodology">Methodology</a></p>
+      </div>
+    </div>
+  </div>
+</footer>

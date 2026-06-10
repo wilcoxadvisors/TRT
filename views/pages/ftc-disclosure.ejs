@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MSQ0CL4HRQ');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="FTC Disclosure — TRT Guide">
+  <meta property="og:description" content="How affiliate revenue works and how it does not influence our editorial ratings.">
+  <meta property="og:site_name" content="TRT Guide">
+  <meta name="twitter:title" content="FTC Disclosure — TRT Guide">
+  <meta name="twitter:description" content="How affiliate revenue works and how it does not influence our editorial ratings.">
+  <title>FTC Disclosure — How Affiliate Revenue Works at TRT Guide</title>
+  <meta name="description" content="How affiliate revenue works at TRT Guide and how it does not influence our editorial ratings. Full transparency on how we fund our reviews.">
+  <meta property="og:image" content="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/fca12b56-94bd-431a-9a2c-d3362daaad60.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+  <style>
+    .legal-page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    .legal-page h1 { font-size: 2.25rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .legal-meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .legal-page h2 { font-size: 1.25rem; color: var(--ink); margin: 2.5rem 0 1rem; }
+    .legal-page p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.8; margin-bottom: 1.25rem; }
+    .legal-page ul, .legal-page ol { margin: 1rem 0 1.5rem 1.5rem; }
+    .legal-page li { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <%- include('../partials/header', { currentPath }) %>
+
+  <div class="legal-page">
+    <h1>FTC Disclosure</h1>
+    <div class="legal-meta">Last updated: Q2 2026</div>
+
+    <p><strong>TRT Guide participates in affiliate programs.</strong> When you click a link on our site and purchase from a reviewed clinic, we may earn a commission. This does not cost you anything — affiliate fees are paid by the clinic, not the customer.</p>
+
+    <h2>What this means for you</h2>
+    <p>We want to be explicit about how this works so you can make an informed decision:</p>
+    <ul>
+      <li>Affiliate links are identified with <code>sponsored</code> or <code>affiliate</code> rel attributes in the HTML.</li>
+      <li>Affiliate relationships are disclosed on every page that contains a commission-generating link.</li>
+      <li>Our scores and verdicts are determined by merit — a clinic does not pay to appear higher, and a clinic does not pay to remove a negative finding.</li>
+      <li>We have never accepted payment in exchange for a favorable review, and we will not.</li>
+    </ul>
+
+    <h2>How affiliate revenue works</h2>
+    <p>When you click a clinic link on TRT Guide and purchase a subscription, the clinic tracks that you came from TRT Guide and pays us a commission — typically 10–30% of your first monthly payment. This is standard practice for online health services. The price you pay is identical whether you come through our link or go directly.</p>
+
+    <h2>Incentive alignment</h2>
+    <p>Our revenue depends on you being satisfied with your purchase. If we recommend a clinic that delivers poor service, you won't return, and we won't earn from future referrals. This creates a direct alignment between our financial interests and your actual outcome — which is why we take our editorial process seriously.</p>
+
+    <h2>If a clinic changes</h2>
+    <p>If a clinic we recommend raises prices, degrades quality, or changes its terms, we update the review in the next quarterly cycle. If a change is significant enough to affect our verdict, we may update immediately. Historical versions of reviews are not archived with timestamps.</p>
+
+    <h2>Questions?</h2>
+    <p>If you have questions about our affiliate relationships, contact us at <strong>editorial@trtguide.com</strong>.</p>
+
+    <div style="margin-top:3rem;padding:1.5rem;background:var(--parchment-dark);border:1px solid var(--border);border-radius:8px;font-size:0.8rem;color:var(--muted);">
+      This disclosure is made in compliance with the FTC's 16 CFR Part 255 guidelines regarding use of endorsements and testimonials in advertising.
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+  <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7340646-c3d0-4453-b928-193f9b713f1a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
+  <% if (analyticsSnippet) { %><%- analyticsSnippet %><% } %>
+</body>
+</html>

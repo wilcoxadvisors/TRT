@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MSQ0CL4HRQ');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="<%= name %> Review (<%= score %>/10) — TRT Guide">
+  <meta property="og:description" content="<%= name %> review — <%= score %>/10. <%= tagline.replace(/—/g, '').trim() %>. <%= price %>.">
+  <meta property="og:site_name" content="TRT Guide">
+  <meta name="twitter:title" content="<%= name %> Review (<%= score %>/10) — TRT Guide">
+  <meta name="twitter:description" content="<%= name %> review — <%= score %>/10. <%= tagline.replace(/—/g, '').trim() %>. <%= price %>.">
+  <title><%= name %> Review (<%= score %>/10) — TRT Guide</title>
+  <meta name="description" content="<%= name %> review — <%= score %>/10. <%= tagline.replace(/—/g, '').trim() %>. <%= price %>. Read our full review.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": { "@type": "Organization", "name": "<%= name %>" },
+    "reviewRating": { "@type": "Rating", "ratingValue": "<%= score %>", "bestRating": "10" },
+    "author": { "@type": "Organization", "name": "TRT Guide" },
+    "description": "<%= verdict.replace(/"/g, '"').slice(0, 300) %>"
+  }
+  </script>
+  <meta property="og:image" content="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/fca12b56-94bd-431a-9a2c-d3362daaad60.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+  <style>
+    /* Score tier helper for EJS */
+    <%
+      function scoreTierClass(s) {
+        if (s >= 9) return 'tier-a';
+        if (s >= 8) return 'tier-b';
+        if (s >= 7) return 'tier-c';
+        return 'tier-d';
+      }
+      function scoreFillClass(s) {
+        if (s >= 9) return 'score-fill-a';
+        if (s >= 8) return 'score-fill-b';
+        if (s >= 7) return 'score-fill-c';
+        return 'score-fill-d';
+      }
+      const overallTier = scoreTierClass(score);
+    %>
+  </style>
+</head>
+<body>
+  <%- include('../partials/header', { currentPath }) %>
+
+  <!-- REVIEW HEADER -->
+  <div class="review-header-area">
+    <div class="review-header-inner">
+      <div class="review-rank-badge">#<%= rank %> of reviewed clinics &middot; Updated <%= lastReviewed %></div>
+      <h1 class="review-title"><%= name %> Review</h1>
+      <p class="review-tagline"><%= tagline %></p>
+      <div class="review-meta-bar">
+        <div class="review-score-box">
+          <div class="review-score-num"><%= score %></div>
+          <div class="review-score-label">Overall score</div>
+        </div>
+        <div>
+          <div class="review-price"><%= price %></div>
+          <div class="review-price-label"><%= priceDetail %></div>
+        </div>
+        <% if (badge) { %><div class="review-badge"><%= badge %></div><% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- FTC NOTICE — unobtrusive -->
+  <div class="ftc-notice">
+    <em>This page contains affiliate links. We may earn a commission if you sign up — our ratings are based on merit only. <a href="/ftc-disclosure">Full FTC disclosure</a></em>
+  </div>
+
+  <!-- REVIEW BODY + STICKY RAIL -->
+  <div class="review-body" style="background:var(--parchment);">
+    <div class="review-layout">
+
+      <!-- Left: article content -->
+      <article class="review-article">
+        <div class="review-body-inner">
+
+          <!-- Verdict first -->
+          <div class="verdict-box">
+            <div class="verdict-label">Our verdict</div>
+            <p class="verdict-text"><%= verdict %></p>
+          </div>
+
+          <!-- Top-of-article prominent CTA -->
+          <div class="review-top-cta">
+            <div class="review-top-cta-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Editor's pick — #<%= rank %> in our rankings
+            </div>
+            <div class="review-top-cta-body">
+              <div class="review-top-cta-text">
+                <strong><%= name %></strong> — <%= price %> with <%= priceDetail %>.
+                Check current pricing and availability directly on their site.
+              </div>
+              <a href="<%= affiliateUrl %>" class="review-cta-btn" target="_blank" rel="noopener sponsored">
+                Check current pricing →
+              </a>
+            </div>
+          </div>
+
+          <!-- Pros & Cons -->
+          <div class="pros-cons">
+            <div class="pros-box">
+              <h3>What we like</h3>
+              <ul>
+                <% pros.forEach(p => { %><li><%= p %></li><% }); %>
+              </ul>
+            </div>
+            <div class="cons-box">
+              <h3>Trade-offs to know</h3>
+              <ul>
+                <% cons.forEach(c => { %><li><%= c %></li><% }); %>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Pricing table -->
+          <div class="pricing-section">
+            <h2 class="section-sub-head">Pricing at a glance</h2>
+            <table class="pricing-table">
+              <thead>
+                <tr>
+                  <th class="pricing-th">Line item</th>
+                  <th class="pricing-th pricing-th-r">Monthly</th>
+                  <th class="pricing-th pricing-th-r">Annual est.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="pricing-row pricing-row-odd">
+                  <td class="pricing-td">Membership / consults</td>
+                  <td class="pricing-td pricing-td-r pricing-val mono"><%= price.replace('/mo','').replace('/4wk','') %></td>
+                  <td class="pricing-td pricing-td-r pricing-muted">Included</td>
+                </tr>
+                <tr class="pricing-row pricing-row-even">
+                  <td class="pricing-td">Lab work (quarterly)</td>
+                  <td class="pricing-td pricing-td-r pricing-muted">$0</td>
+                  <td class="pricing-td pricing-td-r pricing-muted">Included</td>
+                </tr>
+                <tr class="pricing-row pricing-row-odd pricing-row-last">
+                  <td class="pricing-td">Medication (pharmacy)</td>
+                  <td class="pricing-td pricing-td-r pricing-muted">Varies</td>
+                  <td class="pricing-td pricing-td-r pricing-muted">Varies</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Rubric breakdown -->
+          <div class="rubric-section" id="rubric-breakdown">
+            <h2 class="rubric-title">10-point breakdown</h2>
+            <div class="rubric-items">
+              <% rubric.forEach(item => { %>
+              <%
+                const itemScore = item.score || 0;
+                const itemDetail = item.detail || '';
+                const tierClass = scoreTierClass(itemScore);
+                const fillClass = scoreFillClass(itemScore);
+              %>
+              <div class="rubric-card">
+                <div class="rubric-card-header">
+                  <div style="display:flex;align-items:center;gap:0.5rem;flex:1;">
+                    <span class="rubric-card-num"><%= String(item.num).padStart(2,'0') %></span>
+                    <span class="rubric-card-name"><%= item.name %></span>
+                  </div>
+                  <div class="score-bar-wrap">
+                    <span class="rubric-card-score <%= tierClass %>"><%= itemScore %></span>
+                    <div class="score-bar">
+                      <div class="score-fill <%= fillClass %>" style="width:<%= itemScore * 10 %>%"></div>
+                    </div>
+                  </div>
+                </div>
+                <% if (itemDetail) { %><p class="rubric-card-detail"><%= itemDetail %></p><% } %>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+
+          <!-- Related reading + guides -->
+          <div style="margin:2.5rem 0;padding:1.5rem;background:var(--parchment-dark);border:1px solid var(--border);border-radius:8px;">
+            <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:0.75rem;">Related reading</p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <a href="/learn/what-is-trt" style="flex:1;min-width:140px;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:1rem;margin-bottom:0.3rem;">🧬</div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--ink);margin-bottom:0.25rem;">What is TRT?</div>
+                <div style="font-size:0.72rem;color:var(--muted);line-height:1.4;">The basics before you sign up.</div>
+              </a>
+              <a href="/learn/trt-for-beginners" style="flex:1;min-width:140px;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:1rem;margin-bottom:0.3rem;">💉</div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--ink);margin-bottom:0.25rem;">TRT for beginners</div>
+                <div style="font-size:0.72rem;color:var(--muted);line-height:1.4;">Your first 90 days explained.</div>
+              </a>
+              <a href="/learn/trt-cost" style="flex:1;min-width:140px;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:1rem;margin-bottom:0.3rem;">💰</div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--ink);margin-bottom:0.25rem;">TRT cost breakdown</div>
+                <div style="font-size:0.72rem;color:var(--muted);line-height:1.4;">Know what you're actually paying.</div>
+              </a>
+              <a href="/learn/trt-benefits" style="flex:1;min-width:140px;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:1rem;margin-bottom:0.3rem;">⚡</div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--ink);margin-bottom:0.25rem;">Benefits & risks</div>
+                <div style="font-size:0.72rem;color:var(--muted);line-height:1.4;">Evidence and trade-offs.</div>
+              </a>
+              <a href="/learn/trt-side-effects" style="flex:1;min-width:140px;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:1rem;margin-bottom:0.3rem;">⚠️</div>
+                <div style="font-size:0.78rem;font-weight:600;color:var(--ink);margin-bottom:0.25rem;">Side effects & risks</div>
+                <div style="font-size:0.72rem;color:var(--muted);line-height:1.4;">What to watch for on TRT.</div>
+              </a>
+            </div>
+            <div style="margin-top:1rem;text-align:right;">
+              <a href="/learn" style="font-size:0.8rem;color:var(--gold-dark);font-weight:600;text-decoration:none;">All 6 articles →</a>
+            </div>
+          </div>
+
+          <!-- Buying guides -->
+          <div style="margin:2.5rem 0;padding:1.5rem;background:var(--ink);border:1px solid rgba(250,248,244,0.1);border-radius:8px;">
+            <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(250,248,244,0.4);margin-bottom:0.75rem;">Buying guides</p>
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+              <a href="/guides/best-trt-under-200" style="flex:1;min-width:160px;background:rgba(250,248,244,0.06);border:1px solid rgba(250,248,244,0.12);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:0.75rem;font-weight:600;color:var(--gold);margin-bottom:0.25rem;">Under $200/mo</div>
+                <div style="font-size:0.78rem;color:var(--white);font-weight:500;">Best TRT clinics ranked by value</div>
+              </a>
+              <a href="/guides/hone-vs-marek-cost" style="flex:1;min-width:160px;background:rgba(250,248,244,0.06);border:1px solid rgba(250,248,244,0.12);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:0.75rem;font-weight:600;color:var(--gold);margin-bottom:0.25rem;">Head-to-head</div>
+                <div style="font-size:0.78rem;color:var(--white);font-weight:500;">Hone Health vs. Marek Health</div>
+              </a>
+              <a href="/guides/defy-vs-marek" style="flex:1;min-width:160px;background:rgba(250,248,244,0.06);border:1px solid rgba(250,248,244,0.12);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:0.75rem;font-weight:600;color:var(--gold);margin-bottom:0.25rem;">Head-to-head</div>
+                <div style="font-size:0.78rem;color:var(--white);font-weight:500;">Defy Medical vs. Marek Health</div>
+              </a>
+              <a href="/comparison" style="flex:1;min-width:160px;background:rgba(250,248,244,0.06);border:1px solid rgba(250,248,244,0.12);border-radius:6px;padding:0.875rem;text-decoration:none;display:block;">
+                <div style="font-size:0.75rem;font-weight:600;color:var(--gold);margin-bottom:0.25rem;">Comparison</div>
+                <div style="font-size:0.78rem;color:var(--white);font-weight:500;">All 9 clinics side-by-side</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Affiliate CTA — bottom of article -->
+          <div class="affiliate-cta-bottom">
+            <div class="affiliate-cta-bottom-label">Ready to compare?</div>
+            <p class="affiliate-cta-bottom-headline">Claim your <%= price %> protocol at <%= name %></p>
+            <p class="affiliate-cta-bottom-sub">Prices and availability as of <%= lastReviewed %>. No commitment required.</p>
+            <a href="<%= affiliateUrl %>" class="review-cta-btn review-cta-btn-bottom" target="_blank" rel="noopener sponsored">
+              Visit <%= name %> →
+            </a>
+            <div class="affiliate-cta-bottom-disclaimer">We may earn a commission if you sign up — at no extra cost to you. <a href="/ftc-disclosure" style="color:inherit;text-decoration:underline;">Full disclosure →</a></div>
+          </div>
+
+          <div class="review-updated">
+            <strong>Last reviewed:</strong> <%= lastReviewed %> &nbsp;&middot;&nbsp; <strong>Next update:</strong> Q3 2026 &nbsp;&middot;&nbsp; <a href="/methodology" style="color:var(--gold-dark);">See our methodology →</a>
+          </div>
+
+          <!-- Navigation to other reviews -->
+          <div class="review-nav">
+            <div>
+              <% if (prevClinic) { %>
+                <a href="/reviews/<%= prevClinic.slug %>">← <%= prevClinic.name %></a>
+              <% } %>
+            </div>
+            <a href="/comparison">All reviews</a>
+            <div>
+              <% if (nextClinic) { %>
+                <a href="/reviews/<%= nextClinic.slug %>"><%= nextClinic.name %> →</a>
+              <% } %>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- Right: sticky rail -->
+      <aside class="review-rail">
+        <div class="rail-card">
+          <div class="rail-header">
+            <div class="rail-clinic-name"><%= name %></div>
+            <div class="rail-score-row">
+              <div class="rail-score-num"><%= score %></div>
+              <div class="rail-score-denom">/10</div>
+              <% if (badge) { %><div class="best-tag" style="margin-left:auto;"><%= badge %></div><% } %>
+            </div>
+            <div class="rail-best-for"><em>Best for:</em> <%= tagline.split('—')[0].trim() %></div>
+          </div>
+          <div class="rail-body">
+            <div class="rail-price-row">
+              <div class="rail-price mono"><%= price %></div>
+              <div class="rail-price-detail"><%= priceDetail.split(',')[0] %></div>
+            </div>
+            <a href="<%= affiliateUrl %>" class="btn-primary" target="_blank" rel="noopener sponsored">
+              Visit <%= name %> →
+            </a>
+            <div class="rail-ftc">
+              <em>Affiliate link — we earn a commission if you sign up. <a href="/ftc-disclosure">Disclosure</a></em>
+            </div>
+          </div>
+        </div>
+
+        <!-- Score breakdown mini-table in rail -->
+        <div style="margin-top:1rem;background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+          <div style="padding:0.75rem 1rem;background:var(--parchment-dark);font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-soft);border-bottom:1px solid var(--border);">Score breakdown</div>
+          <% rubric.slice(0,5).forEach(item => { %>
+          <%
+            const s = item.score || 0;
+            const tc = scoreTierClass(s);
+          %>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0.55rem 1rem;border-bottom:1px solid var(--border);font-size:0.78rem;">
+            <span style="color:var(--muted)"><%= item.name.replace(' transparency','').replace(' oversight','').replace(' experience','') %></span>
+            <span class="score-pill <%= tc %>" style="font-size:0.72rem;padding:1px 7px;"><%= s %></span>
+          </div>
+          <% }); %>
+          <div style="padding:0.5rem 1rem;text-align:center;font-size:0.72rem;color:var(--gold-dark);">
+            <a href="#rubric-breakdown" style="color:var(--gold-dark);font-weight:600;text-decoration:none;">+ 5 more categories ↓</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Mobile sticky CTA bar -->
+  <div class="review-mobile-cta">
+    <div class="review-mobile-cta-inner">
+      <div>
+        <div class="review-mobile-cta-score"><%= score %>/10</div>
+        <div class="review-mobile-cta-name"><%= name %></div>
+      </div>
+      <div style="flex:1;text-align:center;font-size:0.78rem;color:rgba(250,248,244,0.5);">
+        <%= price %>
+      </div>
+      <a href="<%= affiliateUrl %>" class="btn-mobile-cta" target="_blank" rel="noopener sponsored">
+        Visit Site →
+      </a>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+  <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7340646-c3d0-4453-b928-193f9b713f1a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
+  <% if (analyticsSnippet) { %><%- analyticsSnippet %><% } %>
+</body>
+</html>

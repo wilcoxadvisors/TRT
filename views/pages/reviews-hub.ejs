@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MSQ0CL4HRQ');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="TRT Clinic Reviews — All <%= clinics.length %> Clinics Ranked | TRT Guide">
+  <meta property="og:description" content="Full reviews of <%= clinics.length %> online TRT clinics. Each scored on a 10-point rubric: pricing, medical oversight, lab work, shipping, and more.">
+  <meta property="og:site_name" content="TRT Guide">
+  <meta name="twitter:title" content="TRT Clinic Reviews — All <%= clinics.length %> Clinics Ranked | TRT Guide">
+  <meta name="twitter:description" content="Full reviews of <%= clinics.length %> online TRT clinics. Each scored on a 10-point rubric.">
+  <title>TRT Clinic Reviews — All <%= clinics.length %> Clinics Ranked | TRT Guide</title>
+  <meta name="description" content="Full reviews of <%= clinics.length %> online TRT clinics. Each scored on a 10-point rubric covering pricing transparency, medical oversight, medication menu, and more.">
+  <meta property="og:image" content="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/fca12b56-94bd-431a-9a2c-d3362daaad60.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://trtguide.polsia.app" },
+      { "@type": "ListItem", "position": 2, "name": "Reviews", "item": "https://trtguide.polsia.app/reviews" }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+  <style>
+    .hub-header { background: var(--ink); color: var(--parchment); padding: 4rem 2rem 3rem; }
+    .hub-header-inner { max-width: 900px; margin: 0 auto; }
+    .hub-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 600; margin-bottom: 1rem; }
+    .hub-title { font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+    .hub-sub { font-size: 1rem; color: rgba(250,248,244,0.6); max-width: 560px; line-height: 1.75; }
+    .hub-body { padding: 4rem 2rem; background: var(--parchment); }
+    .hub-inner { max-width: 900px; margin: 0 auto; }
+
+    /* Review cards */
+    .review-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .review-card { display: flex; gap: 1.5rem; align-items: center; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; }
+    .review-card:hover { border-color: var(--gold); box-shadow: 0 4px 24px rgba(26,26,46,0.06); }
+
+    /* Score circle */
+    .review-score-circle {
+      flex-shrink: 0; width: 64px; height: 64px;
+      border-radius: 50%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1.2rem; line-height: 1;
+    }
+    .review-score-circle .sub { font-size: 0.6rem; font-weight: 500; margin-top: 2px; opacity: 0.75; }
+    .tier-a-circle  { background: var(--tier-a-bg); color: var(--tier-a); border: 2px solid var(--tier-a); }
+    .tier-b-circle  { background: var(--tier-b-bg); color: var(--tier-b); border: 2px solid var(--tier-b); }
+    .tier-c-circle  { background: var(--tier-c-bg); color: var(--tier-c); border: 2px solid var(--tier-c); }
+    .tier-d-circle  { background: var(--tier-d-bg); color: var(--tier-d); border: 2px solid var(--tier-d); }
+
+    /* Rank badge */
+    .review-rank { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.25rem; }
+
+    /* Content */
+    .review-content { flex: 1; min-width: 0; }
+    .review-name { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 0.2rem; }
+    .review-tagline { font-size: 0.875rem; color: var(--muted); margin-bottom: 0.5rem; line-height: 1.5; }
+    .review-meta { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+    .review-price { font-size: 0.875rem; font-weight: 600; color: var(--ink); }
+    .review-updated { font-size: 0.75rem; color: var(--muted); }
+    .review-badge-pill { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 4px; background: rgba(201,168,76,0.15); color: var(--gold-dark); }
+    .review-arrow { color: var(--gold); font-size: 1.1rem; flex-shrink: 0; }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .review-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .review-score-circle { width: 56px; height: 56px; }
+      .review-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <%- include('../partials/header', { currentPath }) %>
+
+  <div class="hub-header">
+    <div class="hub-header-inner">
+      <div class="hub-eyebrow">Clinic reviews</div>
+      <h1 class="hub-title">TRT clinic reviews</h1>
+      <p class="hub-sub">Every clinic ranked on pricing, medical oversight, lab work, medication menu, and more. Updated Q2 2026.</p>
+    </div>
+  </div>
+
+  <div class="hub-body">
+    <div class="hub-inner">
+      <div class="review-list">
+        <% clinics.forEach(c => { %>
+          <% function scoreTier(s) { if (s >= 9) return 'a'; if (s >= 8) return 'b'; if (s >= 7) return 'c'; return 'd'; } const tier = scoreTier(c.score); %>
+          <a href="/reviews/<%= c.slug %>" class="review-card">
+            <div class="review-score-circle tier-<%= tier %>-circle">
+              <%= c.score %><span class="sub">/10</span>
+            </div>
+            <div class="review-content">
+              <div class="review-rank">#<%= c.rank %> of <%= clinics.length %> clinics &middot; <%= c.lastReviewed %></div>
+              <h2 class="review-name"><%= c.name %></h2>
+              <p class="review-tagline"><%= c.tagline %></p>
+              <div class="review-meta">
+                <span class="review-price"><%= c.price %></span>
+                <span class="review-updated">Updated <%= c.lastReviewed %></span>
+                <% if (c.badge) { %><span class="review-badge-pill"><%= c.badge %></span><% } %>
+              </div>
+            </div>
+            <div class="review-arrow">→</div>
+          </a>
+        <% }); %>
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.5rem;background:var(--parchment-dark);border:1px solid var(--border);border-radius:8px;">
+        <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:0.75rem;">TRT education hub</p>
+        <p style="font-size:0.875rem;color:var(--ink-soft);margin-bottom:1rem;line-height:1.6;">Not sure which clinic to start with? Read our six evidence-based articles on what TRT costs, what the labs mean, and what the research actually shows.</p>
+        <a href="/learn" style="color:var(--gold-dark);font-weight:600;font-size:0.875rem;text-decoration:none;">Browse all 6 articles →</a>
+      </div>
+
+      <div style="margin-top:1.5rem;padding:1.75rem;background:var(--ink);border-radius:8px;text-align:center;">
+        <p style="font-size:1rem;font-weight:600;color:var(--white);margin-bottom:0.75rem;">See all clinics side by side</p>
+        <p style="font-size:0.875rem;color:rgba(250,248,244,0.6);margin-bottom:1.25rem;line-height:1.6;">Pricing, scores, pros and cons — in one table. No affiliate links in the comparison.</p>
+        <a href="/comparison" style="background:var(--gold);color:var(--ink);font-weight:700;font-size:0.875rem;padding:0.7rem 1.5rem;border-radius:6px;text-decoration:none;">View comparison table →</a>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+  <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7340646-c3d0-4453-b928-193f9b713f1a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
+  <% if (analyticsSnippet) { %><%- analyticsSnippet %><% } %>
+</body>
+</html>

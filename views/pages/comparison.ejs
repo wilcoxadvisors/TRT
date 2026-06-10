@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MSQ0CL4HRQ');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="TRT Clinic Comparison">
+  <meta property="og:description" content="Head-to-head comparison of all reviewed online TRT clinics. Same 10-point rubric. Updated Q2 2026.">
+  <meta property="og:site_name" content="TRT Guide">
+  <meta name="twitter:title" content="TRT Clinic Comparison">
+  <meta name="twitter:description" content="Head-to-head comparison of all reviewed online TRT clinics. Same 10-point rubric. Updated Q2 2026.">
+  <title>Compare <%= clinics.length %> TRT Clinics 2026 — Honest Side-by-Side Rankings | TRT Guide</title>
+  <meta name="description" content="Compare all <%= clinics.length %> online TRT clinics for 2026. Side-by-side scores on pricing, medical oversight, and value. Same rubric, every clinic.">
+  <meta property="og:title" content="Compare <%= clinics.length %> TRT Clinics 2026 — Honest Side-by-Side Rankings | TRT Guide">
+  <meta property="og:description" content="Compare all <%= clinics.length %> online TRT clinics for 2026. Side-by-side scores on pricing, medical oversight, and value.">
+  <meta property="og:image" content="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/fca12b56-94bd-431a-9a2c-d3362daaad60.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "TRT Guide",
+    "url": "https://trtguide.polsia.app",
+    "description": "Independent, rubric-based reviews of online TRT clinics."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://trtguide.polsia.app" },
+      { "@type": "ListItem", "position": 2, "name": "Compare Clinics", "item": "https://trtguide.polsia.app/comparison" }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+  <style>
+    <%
+      function scoreTierClass(s) {
+        if (s >= 9) return 'tier-a';
+        if (s >= 8) return 'tier-b';
+        if (s >= 7) return 'tier-c';
+        return 'tier-d';
+      }
+    %>
+  </style>
+</head>
+<body>
+  <%- include('../partials/header', { currentPath }) %>
+
+  <div class="comparison-header">
+    <div class="section-label" style="color:var(--gold);">Q2 2026 review cycle</div>
+    <h1>TRT Clinic Comparison</h1>
+    <p><%= clinics.length %> clinics reviewed on 10 criteria. Each clinic gets the same rubric, same weighting. Click any row to read the full 2,500+ word breakdown.</p>
+  </div>
+
+  <!-- FTC NOTICE — unobtrusive -->
+  <div class="ftc-notice">
+    <em>Some links on this page are affiliate links. We may earn a commission if you purchase — our ratings are based on merit only. <a href="/ftc-disclosure">Full FTC disclosure</a></em>
+  </div>
+
+  <div class="comparison-body">
+    <div class="comparison-inner">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th style="width:44px;"></th>
+            <th>Clinic</th>
+            <th>Score</th>
+            <th>Monthly price</th>
+            <th>Best for</th>
+            <th style="width:80px;">Review</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% clinics.forEach(c => { %>
+          <%
+            const tierClass = scoreTierClass(c.score);
+          %>
+          <tr>
+            <td><span class="rank-tag"><%= c.rank %></span></td>
+            <td>
+              <a href="/reviews/<%= c.slug %>" class="comp-clinic-link"><%= c.name %></a>
+              <% if (c.badge) { %>&nbsp;<span class="best-tag"><%= c.badge %></span><% } %>
+            </td>
+            <td>
+              <span class="comp-score <%= tierClass %>"><%= c.score %></span>
+            </td>
+            <td>
+              <div class="comp-price mono"><%= c.price %></div>
+              <div class="comp-price-detail"><%= c.priceDetail.split(',')[0] %></div>
+            </td>
+            <td style="color:var(--muted);font-size:0.85rem;max-width:200px;"><%= c.tagline.split('—')[0].trim() %></td>
+            <td><a href="/reviews/<%= c.slug %>" style="color:var(--gold-dark);font-weight:600;font-size:0.85rem;text-decoration:none;white-space:nowrap;">Read →</a></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+      <div class="comp-footer">
+        <p>Updated Q2 2026 &middot; Next review cycle: Q3 2026 &middot; <a href="/methodology">See full methodology</a></p>
+        <p style="margin-top:0.75rem;"><a href="/reviews" style="color:var(--gold-dark);font-weight:600;">Browse all <%= clinics.length %> full reviews →</a></p>
+      </div>
+
+      <!-- Quick-compare guide link -->
+      <div style="margin-top:3rem;background:var(--ink);border-radius:8px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);font-weight:600;margin-bottom:0.5rem;">Head-to-head guide</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--white);margin-bottom:0.4rem;">Hone Health vs. Marek Health</div>
+          <div style="font-size:0.85rem;color:rgba(250,248,244,0.5);">Same price range, very different philosophies. We break down which wins on cost, protocol depth, and onboarding speed.</div>
+        </div>
+        <a href="/guides/hone-vs-marek-cost" style="background:var(--gold);color:var(--ink);font-weight:700;font-size:0.875rem;padding:0.7rem 1.5rem;border-radius:6px;text-decoration:none;white-space:nowrap;">Read the guide →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+  <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7340646-c3d0-4453-b928-193f9b713f1a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
+  <% if (analyticsSnippet) { %><%- analyticsSnippet %><% } %>
+</body>
+</html>

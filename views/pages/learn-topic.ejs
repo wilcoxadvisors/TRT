@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MSQ0CL4HRQ');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= topic.title %> — TRT Guide</title>
+  <meta name="description" content="<%= topic.description %>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+  <style>
+    .legal-page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    .legal-page h1 { font-size: 2.25rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .legal-meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .legal-page p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.8; margin-bottom: 1.25rem; }
+    .coming-soon { background: var(--parchment-dark); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; text-align: center; }
+    .coming-soon .emoji { font-size: 3rem; margin-bottom: 1rem; }
+    .level-<%= topic.level.toLowerCase() %> { background: rgba(201,168,76,0.1); color: var(--gold-dark); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 4px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <%- include('../partials/header', { currentPath: '/learn/' + topic.slug }) %>
+
+  <div class="legal-page">
+    <h1><%= topic.icon %> <%= topic.title %></h1>
+    <div class="legal-meta"><span class="level-<%= topic.level.toLowerCase() %>"><%= topic.level %></span> &nbsp;&middot;&nbsp; TRT Education</div>
+
+    <p><%= topic.description %></p>
+
+    <div class="coming-soon">
+      <div class="emoji"><%= topic.icon %></div>
+      <p style="font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:0.5rem;">Full article coming Q3 2026</p>
+      <p>This topic is on our editorial calendar. Our team is researching and writing in-depth coverage for the next update cycle.</p>
+      <a href="/learn" style="color:var(--gold-dark);font-weight:600;text-decoration:none;border-bottom:1px solid var(--gold);">← Back to all topics</a>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+  <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7340646-c3d0-4453-b928-193f9b713f1a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
+</body>
+</html>

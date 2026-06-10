@@ -1,0 +1,19 @@
+{
+  "name": "express-postgres-templated",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "npm run sitemap && npm run indexnow && npm run migrate",
+    "migrate": "node migrate.js",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "indexnow": "node scripts/submit-indexnow.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.18.2",
+    "openai": "^4.77.0",
+    "pg": "^8.11.3"
+  }
+}

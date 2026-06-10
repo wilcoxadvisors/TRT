@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSQ0CL4HRQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MSQ0CL4HRQ');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="TRT Buying Guides">
+  <meta property="og:description" content="Practical guides for choosing an online TRT clinic. No hype, just what you need to know before you sign up.">
+  <meta property="og:site_name" content="TRT Guide">
+  <meta name="twitter:title" content="TRT Buying Guides">
+  <meta name="twitter:description" content="Practical guides for choosing an online TRT clinic. No hype, just what you need to know before you sign up.">
+  <title>TRT Buying Guides — Choose the Right TRT Clinic With Confidence | TRT Guide</title>
+  <meta name="description" content="Practical guides for choosing an online TRT clinic. Head-to-head comparisons, cost breakdowns, and what to know before you sign up.">
+  <meta property="og:title" content="TRT Buying Guides — Choose the Right TRT Clinic With Confidence">
+  <meta property="og:description" content="Practical guides for choosing an online TRT clinic. Head-to-head comparisons, cost breakdowns, and what to know before you sign up.">
+  <meta property="og:image" content="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/fca12b56-94bd-431a-9a2c-d3362daaad60.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://trtguide.polsia.app" },
+      { "@type": "ListItem", "position": 2, "name": "TRT Buying Guides", "item": "https://trtguide.polsia.app/guides" }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="icon" href="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/generated-images/company_149911/d323a24d-92ab-4880-9c8f-63ce5adde32e.jpg">
+  <style>
+    .hub-header { background: var(--ink); color: var(--parchment); padding: 4rem 2rem 3rem; }
+    .hub-header-inner { max-width: 900px; margin: 0 auto; }
+    .hub-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 600; margin-bottom: 1rem; }
+    .hub-title { font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+    .hub-sub { font-size: 1rem; color: rgba(250,248,244,0.6); max-width: 560px; line-height: 1.75; }
+    .hub-body { padding: 4rem 2rem; background: var(--parchment); }
+    .hub-inner { max-width: 900px; margin: 0 auto; }
+    .hub-list { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 0; }
+    .guide-card { display: flex; gap: 1.5rem; align-items: flex-start; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; }
+    .guide-card:hover { border-color: var(--gold); box-shadow: 0 4px 24px rgba(26,26,46,0.06); }
+    .guide-icon { font-size: 1.75rem; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+    .guide-content { flex: 1; }
+    .guide-title { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .guide-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.75rem; }
+    .guide-meta { display: flex; gap: 0.75rem; align-items: center; }
+    .guide-readtime { font-size: 0.75rem; color: var(--gold-dark); font-weight: 600; }
+    @media (max-width: 600px) { .guide-card { flex-direction: column; gap: 0.75rem; } }
+  </style>
+</head>
+<body>
+  <%- include('../partials/header', { currentPath }) %>
+
+  <div class="hub-header">
+    <div class="hub-header-inner">
+      <div class="hub-eyebrow">Practical guides</div>
+      <h1 class="hub-title">TRT buying guides</h1>
+      <p class="hub-sub">The questions to ask before you sign up, the traps to avoid, and how to calculate what you will actually pay. No affiliate links in these pages.</p>
+    </div>
+  </div>
+
+  <div class="hub-body">
+    <div class="hub-inner">
+      <div class="hub-list">
+        <% guides.forEach(g => { %>
+        <a href="/guides/<%= g.slug %>" class="guide-card">
+          <div class="guide-icon"><%= g.icon %></div>
+          <div class="guide-content">
+            <h2 class="guide-title"><%= g.title %></h2>
+            <p class="guide-desc"><%= g.description %></p>
+            <div class="guide-meta">
+              <span class="guide-readtime"><%= g.readTime %></span>
+            </div>
+          </div>
+        </a>
+        <% }); %>
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.75rem;background:var(--ink);border-radius:8px;display:flex;flex-direction:column;gap:1.25rem;align-items:center;text-align:center;">
+        <p style="font-size:1.1rem;font-weight:600;color:var(--white);margin:0;">Ready to see these clinics in action?</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+          <a href="/reviews" style="background:var(--gold);color:var(--ink);font-weight:700;font-size:0.875rem;padding:0.65rem 1.5rem;border-radius:6px;text-decoration:none;">Browse all 9 reviews →</a>
+          <a href="/comparison" style="background:rgba(250,248,244,0.08);color:var(--white);font-weight:600;font-size:0.875rem;padding:0.65rem 1.5rem;border-radius:6px;text-decoration:none;border:1px solid rgba(250,248,244,0.2);">Comparison table →</a>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.5rem;background:var(--parchment-dark);border:1px solid var(--border);border-radius:8px;">
+        <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:0.75rem;">TRT education hub</p>
+        <p style="font-size:0.875rem;color:var(--ink-soft);margin-bottom:1rem;">Before you pick a clinic, understand what you're buying. Six evidence-based articles — no medical advice, no fluff.</p>
+        <a href="/learn" style="color:var(--gold-dark);font-weight:600;font-size:0.875rem;text-decoration:none;">Browse all articles →</a>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+  <script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7340646-c3d0-4453-b928-193f9b713f1a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
+  <% if (analyticsSnippet) { %><%- analyticsSnippet %><% } %>
+</body>
+</html>
