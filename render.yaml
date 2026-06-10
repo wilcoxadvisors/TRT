@@ -1,10 +1,14 @@
 services:
   - type: web
     runtime: node
-    name: app
-    buildCommand: npm install
+    name: trt-compass
+    buildCommand: npm install && npm run build
     startCommand: npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: DATABASE_URL
+        sync: false # set in dashboard — Neon PostgreSQL connection string
+      - key: SITE_URL
+        sync: false # set to the Render URL now, custom domain later
