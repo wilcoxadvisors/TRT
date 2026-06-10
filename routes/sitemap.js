@@ -5,9 +5,10 @@
 const express = require('express');
 const router = express.Router();
 const { CLINICS } = require('./clinics');
+const { SITE_URL } = require('../lib/site');
 
 router.get('/sitemap.xml', (_req, res) => {
-  const base = 'https://trtguide.polsia.app';
+  const base = SITE_URL;
   const now = new Date().toISOString().split('T')[0];
 
   const pages = [

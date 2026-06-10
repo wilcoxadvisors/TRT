@@ -14,7 +14,7 @@
  */
 const path = require('path');
 
-const BASE_URL = 'https://trtguide.polsia.app';
+const { SITE_URL: BASE_URL } = require('../lib/site');
 const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'sitemap.xml');
 
 // ── Static pages ───────────────────────────────────────────────────────────────

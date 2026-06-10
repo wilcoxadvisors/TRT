@@ -1,4 +1,4 @@
-# TRT Guide — TRT Clinic Review Hub
+# TRT Compass — TRT Clinic Review Hub
 
 Express.js affiliate review site: clinic reviews, pricing comparison, affiliate
 links, editorial methodology. Render deployment with Neon PostgreSQL.
@@ -12,6 +12,8 @@ links, editorial methodology. Render deployment with Neon PostgreSQL.
 
 - `DATABASE_URL` — PostgreSQL connection string (required)
 - `PORT` — Server port (default: 3000)
+- `SITE_URL` — Canonical site origin used in sitemap, JSON-LD, and IndexNow
+  (default: `https://trtguide.polsia.app`; set to the custom domain once purchased)
 
 ## Endpoints
 

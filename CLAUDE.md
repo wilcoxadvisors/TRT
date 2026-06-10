@@ -1,4 +1,4 @@
-# TRT Guide — Clinic Comparison Hub
+# TRT Compass — Clinic Comparison Hub
 
 ## What this app does
 Affiliate review site comparing online TRT clinics. Users read full reviews (scored on a 10-point rubric), compare pricing, and follow affiliate links to sign up. Revenue = affiliate commissions.
@@ -28,6 +28,7 @@ Express.js + EJS + PostgreSQL (Neon) on Render.
 - Google Analytics 4 (GA4): pageviews, sessions, referral sources via `GA4_MEASUREMENT_ID` env var; snippet built by `lib/landing-context.js:buildGa4Snippet()`.
 
 ## Recent changes
+- 2026-06-10 — Rebrand: TRT Guide → TRT Compass. All templates, meta/OG/Twitter tags, legal pages, content-index author fields updated. Visible emails now @trtcompass.com. New `lib/site.js` is the single source of truth for SITE_NAME/SITE_URL (env-overridable via SITE_URL); views use `<%= siteUrl %>` in JSON-LD/canonical URLs, sitemap + IndexNow scripts read from it. Custom domain to be purchased later — set SITE_URL env when live. Polsia analytics slug left as 'trtguide' (platform tracking ID, not user-facing).
 - 2026-06-09 — IndexNow integration: `scripts/submit-indexnow.js` pings Bing/Yandex/Naver/Seznam/Yep with all sitemap URLs on every deploy. IndexNow key served via Express route at `/83aab6f56375eb123ee557d138ae69e4.txt`. Owner must add site to Bing Webmaster Tools once for authorization (see docs/seo-setup.md). Google Search Console requires one-time OAuth setup — see docs/seo-setup.md.
 - 2026-06-09 — Rankings now computed dynamically from sort position in routes — not hardcoded in content-index.js. Homepage, /reviews hub, /comparison, and individual review pages all reflect live rank from score order. Adding a new clinic to content-index.js automatically slots it into the correct position everywhere.
 - 2026-06-03 — Internal linking map built across all pages. Review template now shows 5 learn article cards + 3 buying guides + comparison link. Learn articles now show top 3 clinic review cards (TRT Nation, Fountain TRT, Peter MD) + 2 guide links. Homepage links to /reviews and /guides hubs. Guides hub and reviews-hub updated with cross-section CTAs.

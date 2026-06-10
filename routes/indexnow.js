@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY || '83aab6f56375eb123ee557d138ae69e4';
-const INDEXNOW_HOST = 'trtguide.polsia.app';
+const { SITE_HOST: INDEXNOW_HOST } = require('../lib/site');
 const INDEXNOW_KEY_LOCATION = `https://${INDEXNOW_HOST}/${INDEXNOW_KEY}.txt`;
 
 // Submit URLs via IndexNow protocol

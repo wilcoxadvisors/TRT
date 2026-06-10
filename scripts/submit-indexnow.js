@@ -6,7 +6,7 @@
  * Does NOT ping Google — requires manual GSC setup (see docs/seo-setup.md).
  */
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY || '83aab6f56375eb123ee557d138ae69e4';
-const HOST = 'trtguide.polsia.app';
+const { SITE_HOST: HOST } = require('../lib/site');
 const KEY_LOCATION = `https://${HOST}/${INDEXNOW_KEY}.txt`;
 
 const URLS = [

@@ -11,12 +11,12 @@
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="<%= name %> Review (<%= score %>/10) — TRT Guide">
+  <meta property="og:title" content="<%= name %> Review (<%= score %>/10) — TRT Compass">
   <meta property="og:description" content="<%= name %> review — <%= score %>/10. <%= tagline.replace(/—/g, '').trim() %>. <%= price %>.">
-  <meta property="og:site_name" content="TRT Guide">
-  <meta name="twitter:title" content="<%= name %> Review (<%= score %>/10) — TRT Guide">
+  <meta property="og:site_name" content="TRT Compass">
+  <meta name="twitter:title" content="<%= name %> Review (<%= score %>/10) — TRT Compass">
   <meta name="twitter:description" content="<%= name %> review — <%= score %>/10. <%= tagline.replace(/—/g, '').trim() %>. <%= price %>.">
-  <title><%= name %> Review (<%= score %>/10) — TRT Guide</title>
+  <title><%= name %> Review (<%= score %>/10) — TRT Compass</title>
   <meta name="description" content="<%= name %> review — <%= score %>/10. <%= tagline.replace(/—/g, '').trim() %>. <%= price %>. Read our full review.">
   <script type="application/ld+json">
   {
@@ -24,7 +24,7 @@
     "@type": "Review",
     "itemReviewed": { "@type": "Organization", "name": "<%= name %>" },
     "reviewRating": { "@type": "Rating", "ratingValue": "<%= score %>", "bestRating": "10" },
-    "author": { "@type": "Organization", "name": "TRT Guide" },
+    "author": { "@type": "Organization", "name": "TRT Compass" },
     "description": "<%= verdict.replace(/"/g, '"').slice(0, 300) %>"
   }
   </script>
