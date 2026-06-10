@@ -1,0 +1,88 @@
+name: Scheduled content generation
+
+on:
+  schedule:
+    # Mondays and Thursdays at 13:00 UTC — one article per run.
+    # NOTE: scheduled workflows only fire on the repository's default branch.
+    - cron: "0 13 * * 1,4"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  id-token: write
+
+jobs:
+  write-article:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate one content piece
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          claude_args: |
+            --allowedTools "Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(node:*),Bash(curl:*),Bash(pkill:*),Read,Write,Edit,Glob,Grep"
+          prompt: |
+            You are the staff writer for TRT Compass, an affiliate review site
+            comparing online TRT clinics. Write exactly ONE new piece of content
+            this run, then open a pull request.
+
+            ## Pick the topic
+            Read docs/content-backlog.md and take the FIRST unchecked item in the
+            Queue. If every item is checked, open no PR and stop.
+
+            ## Study the conventions before writing
+            - Read CLAUDE.md for the architecture rules.
+            - For a `learn:` item, read views/pages/learn-how-long-does-trt-take-to-work.ejs
+              top to bottom as the structural reference, and lib/content-registry.js
+              for the registry shape.
+            - For a `guide:` item, read views/pages/guide-hone-vs-marek-cost.ejs and
+              lib/content-registry.js. Pull all clinic facts (prices, scores, pros/cons)
+              from lib/content-index.js — never invent pricing.
+            - For a `clinic:` item, add one entry to CLINICS in lib/content-index.js
+              following the existing shape exactly (10-criterion rubric, pros, cons,
+              verdict). Use only facts provided in the backlog item; do not invent
+              pricing or features. Review pages, rankings, homepage, comparison and
+              sitemap all generate automatically from that entry.
+
+            ## Write it
+            - npm install first.
+            - For learn/guide: add the registry entry (published: true) AND create
+              views/pages/learn-<slug>.ejs or views/pages/guide-<slug>.ejs, copying
+              the head/meta/JSON-LD/partials/internal-linking/footer structure of the
+              reference template. Use <%= siteUrl %> in canonical/JSON-LD URLs, never
+              a hardcoded domain. Use today's date for datePublished.
+            - 1,500–2,500 words of genuinely useful, evidence-grounded editorial.
+              Honest, specific, no hype. This is health content: no medical advice,
+              hedge appropriately, keep the medical-disclaimer link in the footer,
+              cite what the evidence shows vs what is uncertain.
+            - Internal links: link to at least 2 clinic reviews and 2 related
+              learn/guide pages, matching how existing articles do it.
+
+            ## Verify before committing
+            - node -e "require('./lib/content-registry'); require('./lib/content-index')"
+            - Start the server: DATABASE_URL="postgresql://x:x@localhost:5432/x" PORT=3000 node server.js &
+              then curl the new page's route and confirm HTTP 200 and that the title
+              appears in the HTML. Kill the server afterwards.
+            - node scripts/generate-sitemap.js && git checkout public/sitemap.xml
+              (it must run cleanly; the deploy regenerates it, so don't commit it).
+
+            ## Ship it
+            - Move the backlog item to the Done section in docs/content-backlog.md,
+              checked, with today's date.
+            - Create branch content/<slug>, commit with a clear message, push, and
+              open a PR against the default branch using `gh pr create`. The PR body
+              should summarize the piece, list target keywords, and note any facts a
+              human should double-check before merging.
+            - Touch nothing unrelated. One piece per run.
