@@ -1,10 +1,12 @@
 name: Scheduled content generation
 
 on:
-  schedule:
-    # Mondays and Thursdays at 13:00 UTC — one article per run.
-    # NOTE: scheduled workflows only fire on the repository's default branch.
-    - cron: "0 13 * * 1,4"
+  # Schedule disabled for now — re-enable by uncommenting once the
+  # ANTHROPIC_API_KEY secret is configured and you're ready for auto-content.
+  # schedule:
+  #   # Mondays and Thursdays at 13:00 UTC — one article per run.
+  #   # NOTE: scheduled workflows only fire on the repository's default branch.
+  #   - cron: "0 13 * * 1,4"
   workflow_dispatch: {}
 
 permissions:
